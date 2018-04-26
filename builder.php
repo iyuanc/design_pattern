@@ -61,7 +61,8 @@ class UserBuilder
 $userArr = array(
     'userName' => '松涛',
     'userAge' => '23',
-    'userHobby' => '推理小说');
+    'userHobby' => '推理小说'
+);
 
 $modelUserBuilder = new UserBuilder();
 $modelUserBuilder->builderPeople($userArr);

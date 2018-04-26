@@ -13,56 +13,88 @@
  * Time: 下午3:26
  */
 
-interface subject{
-    public function say();
-    public function send();
+//interface subject{
+//    public function say();
+//    public function send();
+//}
+//
+//class RealSubject  implements subject{
+//    public $name = null;
+//    public function __construct($name)
+//    {
+//        $this->name = $name;
+//    }
+//
+//    public function say()
+//    {
+//        // TODO: Implement say() method.
+//        echo $this->name.'say';
+//    }
+//
+//    public function send()
+//    {
+//        // TODO: Implement send() method.
+//        echo $this->name.'send';
+//    }
+//}
+//
+//
+//class Proxy implements subject{
+//    public $realObject = null;
+//
+//    public function __construct(RealSubject $realObj)
+//    {
+//        $this->realObject = $realObj;
+//    }
+//
+//
+//    public function say()
+//    {
+//        // TODO: Implement say() method.
+//        $this->realObject->say();
+//    }
+//
+//
+//    public function send()
+//    {
+//        // TODO: Implement send() method.
+//        $this->realObject->send();
+//    }
+//}
+//
+//$subject = new RealSubject('xxx');
+//$proxy = new Proxy($subject);
+//$proxy->say();
+//$proxy->send();
+
+//代理抽象接口
+interface shop{
+    public function buy($title);
 }
 
-class RealSubject  implements subject{
-    public $name = null;
-    public function __construct($name)
-    {
-        $this->name = $name;
-    }
-
-    public function say()
-    {
-        // TODO: Implement say() method.
-        echo $this->name.'say';
-    }
-
-    public function send()
-    {
-        // TODO: Implement send() method.
-        echo $this->name.'send';
+//原来的CD商店，被代理对象
+class CDshop implements shop{
+    public function buy($title){
+        echo "购买成功，这是你的《{$title}》唱片".PHP_EOL;
     }
 }
 
-
-class Proxy implements subject{
-    public $realObject = null;
-
-    public function __construct(RealSubject $realObj)
-    {
-        $this->realObject = $realObj;
+//CD代理
+class Proxy implements shop{
+    public function buy($title){
+        $this->go();
+        $CDshop = new CDshop;
+        $CDshop->buy($title);
     }
-
-
-    public function say()
-    {
-        // TODO: Implement say() method.
-        $this->realObject->say();
-    }
-
-
-    public function send()
-    {
-        // TODO: Implement send() method.
-        $this->realObject->send();
+    public function go(){
+        echo "跑去香港代购".PHP_EOL;
     }
 }
 
-$subject = new RealSubject('xxx');
-$proxy = new Proxy($subject);
-$proxy->say();
-$proxy->send();
+//你93年买了张 吻别
+$CDshop = new CDshop;
+$CDshop->buy("吻别");
+//14年你想买张 醒着做梦 找不到CD商店了，和做梦似的，不得不找了个代理去香港帮你代购。
+$proxy = new Proxy;
+$proxy->buy('xxx');
+
